@@ -1,0 +1,59 @@
+swagger: "2.0"
+info:
+  description: "3D Tic Tac Toe Game API"
+  version: "1.0.0"
+  title: "3D Tic Tac Toe"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:5000"
+basePath: "/"
+tags:
+- name: "gameplay"
+  description: "Gameplay Endpoints"
+- name: "game"
+  description: "Game CRUD Endpoints"
+- name: "user"
+  description: "User Operation Endpoints"
+schemes:
+- "https"
+- "http"
+paths:
+  /game/{game_id}/mark:
+    post:
+      tags:
+      - "gameplay"
+      summary: "Puts a marker in a cell"
+      description: ""
+      operationId: "mark"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "game_id"
+        type: "integer"
+        required: true
+      - in: "body"
+        name: "cell"
+        description: "Cell that needs to be marked"
+        required: true
+        schema:
+          $ref: "#/definitions/Cell"
+      responses:
+        405:
+          description: "Invalid input"
+definitions:
+  Cell:
+    type: "object"
+    properties:
+      row:
+        type: "integer"
+        format: "int64"
+      column:
+        type: "integer"
+        format: "int64"
+      layer:
+        type: "integer"
+        format: "int32"
